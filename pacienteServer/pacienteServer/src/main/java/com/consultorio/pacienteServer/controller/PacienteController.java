@@ -40,7 +40,7 @@ public class PacienteController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 	
-	//TODO TERMINAR O ATUALIZAR PACIENTE
+	
 	public ResponseEntity<String> atualizar(@RequestBody Paciente paciente){
 		boolean resultado = pacienteService.atualizar(paciente);
 		if(resultado == true) {
