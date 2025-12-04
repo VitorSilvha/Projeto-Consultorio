@@ -17,9 +17,7 @@ public class PacienteService {
 	public String salvar(Paciente paciente) throws Exception{
 		System.out.println("Salvando paciente na Service" + paciente);
 		
-		
-		//  Validacao
-		
+		//  Validacao		
 		if(paciente.getNome() == null || paciente.getNome().length() <= 2) {
 			throw new Exception("Nome do cliente deve ter no minimo 3 caracter");
 		}
