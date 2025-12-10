@@ -55,4 +55,13 @@ public class PacienteRepository {
 		}
 		return false;
 	}
+	
+	public Paciente buscarPaciente(Integer id) { 
+		for(Paciente p : lista) {
+			if(p.getId().equals(id)) {
+				return p;	
+			}
+		}	
+		return null;
+	}
 }

@@ -65,4 +65,21 @@ public class PacienteController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não encontrado.");
 		}
 	}
+	
+	public ResponseEntity<Boolean> existeCliente(@PathVariable Integer id) { 
+		System.out.println("executando existeCliente");
+		boolean resultado = pacienteService.existePaciente(id);
+		return ResponseEntity.ok(resultado);
+	}
+	
+	public ResponseEntity<Paciente> buscarCliente(@PathVariable Integer id) { 
+		
+		Paciente resultado = pacienteService.buscarCliente(id);
+		if(resultado != null) {
+			return ResponseEntity.ok(resultado);
+		}else {		
+			return ResponseEntity.noContent().build();
+		}
+	}
+	
 }

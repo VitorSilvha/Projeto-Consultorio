@@ -41,4 +41,9 @@ public class PacienteService {
 		return pacienteRepository.existePaciente(id);
 	}
 	
+	public Paciente buscarCliente(Integer id) { 
+		return pacienteRepository.buscarPaciente(id);			
+	}
+
+	
 }
