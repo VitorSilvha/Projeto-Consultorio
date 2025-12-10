@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.coyote.BadRequestException;
+import org.webjars.NotFoundException;
 
+import com.consultorio.apiGw.entidades.exception.ExceptionMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rabbitmq.client.RpcClient.Response;
 
+import feign.Response;
+import feign.codec.ErrorDecoder;
 
 public class RetreiveMessageErrorDecoder implements ErrorDecoder {
     private ErrorDecoder errorDecoder = new Default();
