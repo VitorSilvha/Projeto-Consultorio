@@ -37,14 +37,12 @@ public class PacienteController {
 		}
 	}
 	
-	
 	@RequestMapping(value = "/v1/paciente",method = RequestMethod.GET)
 	public ResponseEntity<List<Paciente>> listar(){
 		List<Paciente> resultado = pacienteService.listar();
 		return ResponseEntity.ok(resultado);
 	}
 
-	
 	@RequestMapping(value = "/v1/paciente/{id}",method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deletar(@PathVariable Integer id) {
 		
@@ -54,7 +52,6 @@ public class PacienteController {
 			}
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
-	
 	
 	@RequestMapping(value = "/v1/paciente",method = RequestMethod.PUT)
 	public ResponseEntity<String> atualizar(@RequestBody Paciente paciente){
@@ -66,12 +63,14 @@ public class PacienteController {
 		}
 	}
 	
+	@RequestMapping(value = "/v1/cliente/existe-cliente/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Boolean> existeCliente(@PathVariable Integer id) { 
 		System.out.println("executando existeCliente");
 		boolean resultado = pacienteService.existePaciente(id);
 		return ResponseEntity.ok(resultado);
 	}
 	
+	@RequestMapping(value = "/v1/cliente/buscar-cliente/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Paciente> buscarCliente(@PathVariable Integer id) { 
 		
 		Paciente resultado = pacienteService.buscarCliente(id);
