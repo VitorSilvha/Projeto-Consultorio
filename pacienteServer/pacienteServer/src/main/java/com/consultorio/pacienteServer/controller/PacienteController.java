@@ -63,15 +63,15 @@ public class PacienteController {
 		}
 	}
 	
-	@RequestMapping(value = "/v1/cliente/existe-cliente/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Boolean> existeCliente(@PathVariable Integer id) { 
+	@RequestMapping(value = "/v1/cliente/existe-paciente/{id}",method = RequestMethod.GET)
+	public ResponseEntity<Boolean> existePaciente(@PathVariable Integer id) { 
 		System.out.println("executando existeCliente");
 		boolean resultado = pacienteService.existePaciente(id);
 		return ResponseEntity.ok(resultado);
 	}
 	
-	@RequestMapping(value = "/v1/cliente/buscar-cliente/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Paciente> buscarCliente(@PathVariable Integer id) { 
+	@RequestMapping(value = "/v1/cliente/buscar-paciente/{id}",method = RequestMethod.GET)
+	public ResponseEntity<Paciente> buscarPaciente(@PathVariable Integer id) { 
 		
 		Paciente resultado = pacienteService.buscarCliente(id);
 		if(resultado != null) {
