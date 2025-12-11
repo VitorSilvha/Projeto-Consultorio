@@ -44,7 +44,5 @@ public class AgendamentoController {
 	public ResponseEntity<List<Agendamento>> listar() {
 		return ResponseEntity.ok(agendamentoService.listar());
 	}
-
-	// TODO Implementar atualizar() e Deletar()
 	
 }

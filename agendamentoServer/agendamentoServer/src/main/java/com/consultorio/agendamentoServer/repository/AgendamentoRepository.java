@@ -29,5 +29,4 @@ public class AgendamentoRepository {
 		return new ArrayList<Agendamento>(mapaAgendamento.values());
 	}
 
-	// TODO Implementar atualizar() e Deletar()
 }

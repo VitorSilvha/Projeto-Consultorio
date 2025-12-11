@@ -37,5 +37,4 @@ public class AgendamentoService {
 		return agendamentoRepository.listar();
 	}
 
-	// TODO Implementar atualizar() e Deletar()
 }

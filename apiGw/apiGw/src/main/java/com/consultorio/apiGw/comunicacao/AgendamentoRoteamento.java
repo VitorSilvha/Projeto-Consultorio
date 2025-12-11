@@ -27,14 +27,9 @@ public interface AgendamentoRoteamento {
 	@RequestMapping(value = "/v1/agendamento", method = RequestMethod.POST)
 	public ResponseEntity<String> salvar(@RequestBody Agendamento agendamento);
 		
-	@RequestMapping(value = "/v1/agendamento/{id}",method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deletar(@PathVariable Integer id);
-	
 	@RequestMapping(value = "/v1/agendamento", method = RequestMethod.GET)
 	public ResponseEntity<List<Agendamento>> listar() ;
-	
-	@RequestMapping(value = "/v1/agendamento",method = RequestMethod.PUT)
-	public ResponseEntity<String> atualizar(@RequestBody Agendamento agendamento);
+
 	
 		
 }
