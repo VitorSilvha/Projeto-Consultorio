@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -16,7 +17,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import com.consultorio.agendamentoServer.entidades.Agendamento;
 import com.consultorio.agendamentoServer.service.AgendamentoService;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:9005")
 public class AgendamentoController {
 
 	@Autowired
