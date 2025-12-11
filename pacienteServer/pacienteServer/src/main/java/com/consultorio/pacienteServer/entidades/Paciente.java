@@ -6,8 +6,8 @@ public class Paciente {
 
 	private Integer id;
 	private String nome;
-	private Integer cpf;
-	private Integer telefone;
+	private String cpf;
+	private String telefone;
 	private Date dataNascimento;
 	private String genero;
 	
@@ -23,16 +23,16 @@ public class Paciente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Integer getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
-	public void setCpf(Integer cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public Integer getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(Integer telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	public Date getDataNascimento() {
