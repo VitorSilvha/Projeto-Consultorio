@@ -16,7 +16,7 @@ import com.consultorio.apiGw.configuration.RetreiveMessageErrorDecoder;
 
 
 @FeignClient(
-        name = "ClienteRoteamento",
+        name = "AgendamentoRoteamento",
         url = "http://localhost:9002/",
         configuration = {RetreiveMessageErrorDecoder.class}
 )
