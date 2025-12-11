@@ -19,7 +19,7 @@ public class PacienteService {
 		
 		//  Validacao		
 		if(paciente.getNome() == null || paciente.getNome().length() <= 2) {
-			throw new Exception("Nome do cliente deve ter no minimo 3 caracter");
+			throw new Exception("Nome do paciente deve ter no minimo 3 caracter");
 		}
 		
 		return pacienteRepository.salvar(paciente);
@@ -41,7 +41,7 @@ public class PacienteService {
 		return pacienteRepository.existePaciente(id);
 	}
 	
-	public Paciente buscarCliente(Integer id) { 
+	public Paciente buscarPaciente(Integer id) { 
 		return pacienteRepository.buscarPaciente(id);			
 	}
 

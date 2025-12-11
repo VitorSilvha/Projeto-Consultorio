@@ -57,23 +57,23 @@ public class PacienteController {
 	public ResponseEntity<String> atualizar(@RequestBody Paciente paciente){
 		boolean resultado = pacienteService.atualizar(paciente);
 		if(resultado == true) {
-			return ResponseEntity.status(HttpStatus.OK).body("Cliente atualizado com sucesso.");
+			return ResponseEntity.status(HttpStatus.OK).body("Paciente atualizado com sucesso.");
 		}else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cliente não encontrado.");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Paciente não encontrado.");
 		}
 	}
 	
-	@RequestMapping(value = "/v1/cliente/existe-paciente/{id}",method = RequestMethod.GET)
+	@RequestMapping(value = "/v1/paciente/existe-paciente/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Boolean> existePaciente(@PathVariable Integer id) { 
-		System.out.println("executando existeCliente");
+		System.out.println("executando existePaciente");
 		boolean resultado = pacienteService.existePaciente(id);
 		return ResponseEntity.ok(resultado);
 	}
 	
-	@RequestMapping(value = "/v1/cliente/buscar-paciente/{id}",method = RequestMethod.GET)
+	@RequestMapping(value = "/v1/paciente/buscar-paciente/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Paciente> buscarPaciente(@PathVariable Integer id) { 
 		
-		Paciente resultado = pacienteService.buscarCliente(id);
+		Paciente resultado = pacienteService.buscarPaciente(id);
 		if(resultado != null) {
 			return ResponseEntity.ok(resultado);
 		}else {		
