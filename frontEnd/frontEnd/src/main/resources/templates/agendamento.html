@@ -3,6 +3,67 @@
 <head> 
     <title>Front End AGENDAMENTOS</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style>
+	    body {
+	        background-color: #f4f9ff; /* Azul bem claro */
+	        font-family: Arial, Helvetica, sans-serif;
+	        margin: 20px;
+	        color: #1a3d5c; /* Azul escuro elegante */
+	    }
+
+	    h1, h3 {
+	        color: #0f4c75; /* Azul clínico */
+	    }
+
+	    table {
+	        background: white;
+	        border-collapse: collapse;
+	        width: 100%;
+	        margin-top: 10px;
+	    }
+
+	    table th {
+	        background-color: #0f4c75; /* Azul hospitalar */
+	        color: white;
+	        padding: 8px;
+	        border: 1px solid #cccccc;
+	        text-align: left;
+	    }
+
+	    table td {
+	        padding: 8px;
+	        border: 1px solid #cccccc;
+	        background-color: #ffffff;
+	    }
+
+	    input[type="text"] {
+	        width: 90%;
+	        padding: 6px;
+	        border: 1px solid #8db5c9;
+	        border-radius: 4px;
+	        background-color: #ffffff;
+	    }
+
+	    button, #buttonAtualizar {
+	        background-color: #1b9aaa; /* Verde-azulado médico */
+	        color: white;
+	        padding: 8px 14px;
+	        border: none;
+	        border-radius: 4px;
+	        cursor: pointer;
+	        margin-right: 5px;
+	        transition: 0.3s;
+			margin-top: 8px;
+	    }
+
+	    button:hover {
+	        background-color: #157a82; /* Tom mais escuro no hover */
+	    }
+
+	    #listaPacientes {
+	        margin-top: 20px;
+	    }
+	</style>
 </head>
 <body>
     
@@ -113,7 +174,7 @@ async function carregarAgendamentos() {
  	if(agendamentos == ""){
  		listaAgendamentos.innerHTML = `Nenhum agendamento cadastrado
  			<br><br>
- 			<input type='button' onclick='carregarAgendamentos()' value='Atualizar'/>
+ 			<input id='buttonAtualizar' type='button' onclick='carregarAgendamentos()' value='Atualizar'/>
  		`;
  		return;
  	}
@@ -138,7 +199,7 @@ async function carregarAgendamentos() {
   	});
   
   	listaAgendamentos.innerHTML  =  '<table border=1>' + linhas + '</table><br>'  +
-  		"<input type='button' onclick='carregarAgendamentos()' value='Atualizar'/>";  
+  		"<input id='buttonAtualizar' type='button' onclick='carregarAgendamentos()' value='Atualizar'/>";  
 }
 
 carregarAgendamentos();

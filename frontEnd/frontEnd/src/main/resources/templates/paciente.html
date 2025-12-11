@@ -1,12 +1,74 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Front End CLIENTE</title>
+<title>Front End Paciente</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+    body {
+        background-color: #f4f9ff; /* Azul bem claro */
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 20px;
+        color: #1a3d5c; /* Azul escuro elegante */
+    }
+
+    h1, h3 {
+        color: #0f4c75; /* Azul clínico */
+    }
+
+    table {
+        background: white;
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    table th {
+        background-color: #0f4c75; /* Azul hospitalar */
+        color: white;
+        padding: 8px;
+        border: 1px solid #cccccc;
+        text-align: left;
+    }
+
+    table td {
+        padding: 8px;
+        border: 1px solid #cccccc;
+        background-color: #ffffff;
+    }
+
+    input[type="text"] {
+        width: 90%;
+        padding: 6px;
+        border: 1px solid #8db5c9;
+        border-radius: 4px;
+        background-color: #ffffff;
+    }
+
+    button, #buttonAtualizar{
+        background-color: #1b9aaa; /* Verde-azulado médico */
+        color: white;
+        padding: 8px 14px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 5px;
+        transition: 0.3s;
+		margin-top: 8px;
+    }
+	
+
+    button:hover {
+        background-color: #157a82; /* Tom mais escuro no hover */
+    }
+
+    #listaPacientes {
+        margin-top: 20px;
+    }
+</style>
 </head>
 <body>
 
-<h1>FRONT-END CLIENTE</h1>
+<h1>FRONT-END PACIENTE</h1>
 
 <h3>Cadastro de Paciente</h3>
 
@@ -32,6 +94,10 @@
   	<td>Genero: </td>
   	<td><input type="text" id="genero" size="50"><br></td>
 </tr>
+	<tr>
+	  	<td>Email: </td>
+	  	<td><input type="text" id="email" size="50"><br></td>
+	</tr>
 </table>  
         
   <button onclick="criarPaciente()">Adicionar</button>
@@ -57,6 +123,7 @@ async function criarPaciente() {
   	const telefone = document.getElementById("telefone").value;
   	const dataNascimento = document.getElementById("dataNascimento").value;
 	const genero = document.getElementById("genero").value;
+	const email = document.getElementById("email").value;
   
   // cria o payload para enviar a api.
 	const body = {
@@ -64,7 +131,8 @@ async function criarPaciente() {
 		"cpf" : cpf,
 		"telefone" : telefone,
 		"dataNascimento" : dataNascimento,
-		"genero" : genero
+		"genero" : genero,
+		"email" : email
  	}
   // realiza a chamada na api
   	await fetch(urlAPI, {
@@ -82,6 +150,7 @@ async function criarPaciente() {
 			document.getElementById("telefone").value = "";
 			document.getElementById("dataNascimento").value = "";
 			document.getElementById("genero").value = "";
+			document.getElementById("email").value = "";
 		}else{
 			// trata o erro no cadastro.
 			const data = response.text().then(d => {
@@ -109,7 +178,7 @@ async function carregarPacientes() {
  	if(pacientes == ""){
  		listaPacientes.innerHTML = `Nenhum paciente cadastrado
  			<br><br>
- 			<input type='button' onclick='carregarPacientes()' value='Atualizar'/>
+ 			<input id='buttonAtualizar' type='button' onclick='carregarPacientes()' value='Atualizar'/>
  		`;
  		return;
  	}
@@ -120,6 +189,7 @@ async function carregarPacientes() {
 		<th>Telefone</th>
 		<th>Data de Nascimento</th>
 		<th>Genero</th>
+		<th>Email</th>
 		<th>Ação</th>`;
   	// vai iterando cada paciente.
  	pacientes.forEach(paciente => {    
@@ -130,6 +200,7 @@ async function carregarPacientes() {
     		<td>${paciente.telefone} </td>
     		<td>${paciente.dataNascimento}</td>
 			<td>${paciente.genero} </td>
+			<td>${paciente.email} </td>
     		<td>
     			<button onclick="editarPaciente(${paciente.id})">Editar</button>
       			<button onclick="excluirPaciente(${paciente.id},'${paciente.nome}')">Excluir</button>
@@ -139,7 +210,7 @@ async function carregarPacientes() {
   	});
   
   	listaPacientes.innerHTML  =  '<table border=1>' + linhas + '</table><br>'  +
-  		"<input type='button' onclick='carregarPacientes()' value='Atualizar'/>";  
+  		"<input id='buttonAtualizar' type='button' onclick='carregarPacientes()' value='Atualizar'/>";  
 }
 
 // Função para excluir um paciente
@@ -171,6 +242,7 @@ async function editarPaciente(id) {
     document.getElementById("telefone").value = paciente.telefone;
     document.getElementById("dataNascimento").value = paciente.dataNascimento;
     document.getElementById("genero").value = paciente.genero;
+    document.getElementById("email").value = paciente.email;
 
     // Guarda o ID do paciente que está sendo editado
     pacienteEmEdicao = paciente.id;
@@ -197,6 +269,7 @@ async function salvarEdicaoPaciente() {
         telefone: document.getElementById("telefone").value,
         dataNascimento: document.getElementById("dataNascimento").value,
         genero: document.getElementById("genero").value
+        genero: document.getElementById("email").value
     };
 
     // Faz o PUT enviando o id dentro do JSON
@@ -221,6 +294,7 @@ async function salvarEdicaoPaciente() {
     document.getElementById("telefone").value = "";
     document.getElementById("dataNascimento").value = "";
     document.getElementById("genero").value = "";
+    document.getElementById("email").value = "";
 
     // Volta o botão ao modo original
     const botao = document.querySelector("button[onclick='salvarEdicaoPaciente()']");

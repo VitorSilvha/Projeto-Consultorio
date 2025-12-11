@@ -10,7 +10,9 @@ public class Paciente {
 	private String telefone;
 	private Date dataNascimento;
 	private String genero;
+	private String email;
 	
+
 	public Integer getId() {
 		return id;
 	}
@@ -47,6 +49,13 @@ public class Paciente {
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	@Override
 	public String toString() {
 		return "Paciente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", telefone=" + telefone + ", dataNascimento="

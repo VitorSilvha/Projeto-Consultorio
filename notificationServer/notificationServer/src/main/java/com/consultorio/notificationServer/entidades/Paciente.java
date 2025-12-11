@@ -1,4 +1,4 @@
-package com.consultorio.apiGw.entidades;
+package com.consultorio.notificationServer.entidades;
 
 import java.util.Date;
 
@@ -54,6 +54,7 @@ public class Paciente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 	@Override
 	public String toString() {
 		return "Paciente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", telefone=" + telefone + ", dataNascimento="

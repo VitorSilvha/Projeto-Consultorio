@@ -60,6 +60,5 @@ public class AgendamentoController {
 	public ResponseEntity<List<Agendamento>> listar(@RequestBody Agendamento agendamento) {
 		System.out.println("executando listar");
 		return agendamentoRotemento.listar();
-		
 		}
 }
