@@ -90,7 +90,7 @@
 			</fieldset>
             <!-- Botão de Ação -->
             <div class="mt-6">
-                <button type="submit" 
+                <button onclick="criarCliente()" 
                         class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-200 shadow-md transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-blue-300">
                     Cadastrar Paciente
                 </button>
@@ -99,7 +99,7 @@
             <div class="mt-6">
                 <button type="submit" 
                         class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-200 shadow-md transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-blue-300">
-                    Cadastrar Paciente
+                    Voltar à página anterior
                 </button>
             </div>			
         </form>
@@ -107,3 +107,56 @@
 
 </body>
 </html>
+
+
+<script type="text/javascript">
+
+const urlAPI = "http://localhost:9003/v1/paciente"; 
+
+// Função para criar um novo cliente
+async function criarCliente() {
+  
+	// pega os dados da tela.
+	const nome = document.getElementById("nome").value;
+	const nascimento = document.getElementById("nascimento").value;
+  	const cpf = document.getElementById("cpf").value;
+  	const genero = document.getElementById("genero").value;
+	const telefone = document.getElementById("telefone").value;
+  
+  // cria o payload para enviar a api.
+	const body = {
+		"nome" : nome,
+		"cpf" : cpf,
+		"telefone" : telefone,
+		"dataNascimento" : nascimento,
+		"genero" : genero
+ 	}
+	
+  // realiza a chamada na api
+  	await fetch(urlAPI, {
+    	method: "POST",
+    	headers: {
+      	"Content-Type": "application/json"
+    	},
+    	body: JSON.stringify( body )
+  	}).then(response =>{
+		// trata o status de sucesso.		
+	  	if(response.status == 200){	  		
+			alert("sucesso no cadastro do cliente");
+			document.getElementById("nome").value = ""; // Limpa o campo de entrada
+			document.getElementById("nascimento").value = "";
+			document.getElementById("cpf").value = "";
+			document.getElementById("genero").value = "";
+			document.getElementById("telefone").value = "";
+		}else{
+			// trata o erro no cadastro.
+			const data = response.text().then(d => {
+				alert("Erro no cadastro \n" + d);
+			});
+
+		}	  
+ 	 });
+
+}
+
+</script>
