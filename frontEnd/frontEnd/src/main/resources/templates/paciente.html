@@ -151,7 +151,87 @@ async function excluirPaciente(id,nome) {
 
 	carregarPacientes(); 
   }
+ 
 }
+
+
+// Variável global para armazenar o ID do paciente que está sendo editado
+let pacienteEmEdicao = null;
+
+// Função para editar um paciente
+async function editarPaciente(id) {
+
+    // Buscar o paciente pelo ID (GET /v1/paciente/buscar-paciente/{id})
+    const response = await fetch(`${urlAPI}/buscar-paciente/${id}`);
+    const paciente = await response.json();
+
+    // Preenche os campos da tela com os dados do paciente
+    document.getElementById("nome").value = paciente.nome;
+    document.getElementById("cpf").value = paciente.cpf;
+    document.getElementById("telefone").value = paciente.telefone;
+    document.getElementById("dataNascimento").value = paciente.dataNascimento;
+    document.getElementById("genero").value = paciente.genero;
+
+    // Guarda o ID do paciente que está sendo editado
+    pacienteEmEdicao = paciente.id;
+
+    // Altera o botão principal para "Salvar Alterações"
+    const botao = document.querySelector("button[onclick='criarPaciente()']");
+    botao.innerText = "Salvar Edição";
+    botao.onclick = salvarEdicaoPaciente;
+}
+
+// Função que envia os dados editados ao back-end
+async function salvarEdicaoPaciente() {
+
+    if (!pacienteEmEdicao) {
+        alert("Nenhum paciente selecionado para edição.");
+        return;
+    }
+
+    // Captura os dados atualizados da tela
+    const body = {
+        id: pacienteEmEdicao,
+        nome: document.getElementById("nome").value,
+        cpf: document.getElementById("cpf").value,
+        telefone: document.getElementById("telefone").value,
+        dataNascimento: document.getElementById("dataNascimento").value,
+        genero: document.getElementById("genero").value
+    };
+
+    // Faz o PUT enviando o id dentro do JSON
+    const response = await fetch(urlAPI, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    });
+
+    if (response.status === 200) {
+        alert("Paciente atualizado com sucesso!");
+    } else {
+        const erro = await response.text();
+        alert("Erro ao atualizar paciente:\n" + erro);
+    }
+
+    // Limpa formulario
+    document.getElementById("nome").value = "";
+    document.getElementById("cpf").value = "";
+    document.getElementById("telefone").value = "";
+    document.getElementById("dataNascimento").value = "";
+    document.getElementById("genero").value = "";
+
+    // Volta o botão ao modo original
+    const botao = document.querySelector("button[onclick='salvarEdicaoPaciente()']");
+    botao.innerText = "Adicionar";
+    botao.onclick = criarPaciente;
+
+    pacienteEmEdicao = null;
+
+    carregarPacientes();
+}
+
 carregarPacientes();
 
 
