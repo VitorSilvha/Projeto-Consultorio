@@ -7,7 +7,7 @@ public class Agendamento {
 	private Integer idAgendamento;
 	private Integer idPaciente;
 	private Date data;
-	private String status; // ex: cancelado, realizado
+	private String status; // ex: cancelado,  realizado, confirmado
 	private String categoria; // ex: exame, consulta, cirurgia
 	private String observacoes;
 

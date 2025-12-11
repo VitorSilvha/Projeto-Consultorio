@@ -12,9 +12,9 @@ public class FrontEndController {
 		return "paciente";
 	}
 
-	@GetMapping("/agendamentos")
-	public String agendamentos(Model model) {
-		return "agendamentos";
+	@GetMapping("/agendamento")
+	public String agendamento(Model model) {
+		return "agendamento";
 	}
 
 }

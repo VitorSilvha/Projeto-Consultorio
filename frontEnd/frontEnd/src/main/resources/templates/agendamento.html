@@ -1,39 +1,43 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <title>Front End VENDAS</title> 
+    <title>Front End AGENDAMENTOS</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
     
-    <h1>FRONT-END VENDAS</h1>
+    <h1>FRONT-END AGENDAMENTOS</h1>
 
-    <h3>Cadastro de venda</h3>
+    <h3>Cadastro de agendamentos</h3>
     
     
     <table>
     <tr>
-        <td> Codigo do Cliente: </td>
-           <td><input type="text" id="nome" size="50" ><br></td>
+        <td> Id do Paciente: </td>
+           <td><input type="text" id="idPaciente" size="50" ><br></td>
     </tr>
     <tr>
-        <td>Email: </td>
-          <td><input type="text" id="email" size="50"><br></td>
+        <td>Data agendamento: </td>
+          <td><input type="text" id="data" size="50"><br></td>
     </tr>
     <tr>
-          <td>CPF:</td>
-           <td><input type="text" id="cpf" size="20"> <br></td>
+          <td>Status:</td>
+           <td><input type="text" id="status" size="20"> <br></td>
     </tr>
     <tr>
-          <td>CEP: </td>
-          <td><input type="text" id="cep" size="50"><br></td>
+          <td>Categoria: </td>
+          <td><input type="text" id="categoria" size="50"><br></td>
     </tr>
+	  <tr>
+	        <td>Observacoes: </td>
+	        <td><input type="text" id="observacoes" size="50"><br></td>
+	  </tr>
     </table>  
-            
-      <button onclick="criarCliente()">Adicionar</button>
+	
+      <button onclick="criarAgendamento()">Adicionar</button>
     
-       <h3>Listagem de Cliente </h3>
-      <div id="listaClientes"></div> 
+       <h3>Listagem de Agendamento </h3>
+      <div id="listaAgendamentos"></div> 
     
 </body>
 </html>
@@ -46,25 +50,25 @@
 
 <script type="text/javascript">
 
-const urlAPI = "http://localhost:9003/v1/paciente"; // URL da API pacienteServices
+const urlAPI = "http://localhost:9002/v1/agendamento"; // URL da API agendamentoServices
 
-// Função para criar um novo paciente
-async function criarPaciente() {
+// Função para criar um novo agendamento
+async function criarAgendamento() {
   
 	// pega os dados da tela.
-	const nome = document.getElementById("nome").value;
-	const cpf = document.getElementById("cpf").value;
-  	const telefone = document.getElementById("telefone").value;
-  	const dataNascimento = document.getElementById("dataNascimento").value;
-	const genero = document.getElementById("genero").value;
+	const idPaciente = document.getElementById("idPaciente").value;
+	const data = document.getElementById("data").value;
+  	const status = document.getElementById("status").value;
+  	const categoria = document.getElementById("categoria").value;
+	const observacoes = document.getElementById("observacoes").value;
   
   // cria o payload para enviar a api.
 	const body = {
-		"nome" : nome,
-		"cpf" : cpf,
-		"telefone" : telefone,
-		"dataNascimento" : dataNascimento,
-		"genero" : genero
+		"idPaciente" : idPaciente,
+		"data" : data,
+		"status" : status,
+		"categoria" : categoria,
+		"observacoes" : observacoes
  	}
   // realiza a chamada na api
   	await fetch(urlAPI, {
@@ -76,12 +80,12 @@ async function criarPaciente() {
   	}).then(response =>{
 		// trata o status de sucesso.		
 	  	if(response.status == 200){	  		
-			alert("sucesso no cadastro do paciente");
-			document.getElementById("nome").value = "";
-			document.getElementById("cpf").value = "";
-			document.getElementById("telefone").value = "";
-			document.getElementById("dataNascimento").value = "";
-			document.getElementById("genero").value = "";
+			alert("sucesso no cadastro do agendamento");
+			document.getElementById("idPaciente").value = "";
+			document.getElementById("data").value = "";
+			document.getElementById("status").value = "";
+			document.getElementById("categoria").value = "";
+			document.getElementById("observacoes").value = "";
 		}else{
 			// trata o erro no cadastro.
 			const data = response.text().then(d => {
@@ -92,67 +96,51 @@ async function criarPaciente() {
  	 })
   ;
   
-  	carregarPacientes(); // Atualiza a lista de pacientes
+  	carregarAgendamentos(); // Atualiza a lista de agendamentos
 }
 
-//Função para carregar os pacientes 
-async function carregarPacientes() {
+//Função para carregar os agendamentos 
+async function carregarAgendamentos() {
 
 	// realiza a chamda na api
 	const response = await fetch(urlAPI);
-  	// transforma os dados da api para paciente (json-> objeto)
-	const pacientes = await response.json();
+  	// transforma os dados da api para agendamento (json-> objeto)
+	const agendamentos = await response.json();
 
-  	const listaPacientes = document.getElementById("listaPacientes");
- 	listaPacientes.innerHTML = ""; // Limpa a lista antes de adicionar as tarefas
+  	const listaAgendamentos = document.getElementById("listaAgendamentos");
+ 	listaAgendamentos.innerHTML = ""; // Limpa a lista antes de adicionar as tarefas
  	
- 	if(pacientes == ""){
- 		listaPacientes.innerHTML = `Nenhum paciente cadastrado
+ 	if(agendamentos == ""){
+ 		listaAgendamentos.innerHTML = `Nenhum agendamento cadastrado
  			<br><br>
- 			<input type='button' onclick='carregarPacientes()' value='Atualizar'/>
+ 			<input type='button' onclick='carregarAgendamentos()' value='Atualizar'/>
  		`;
  		return;
  	}
   
  	var linhas = `<tr>
-		<th>Nome</th>
-		<th>CPF</th>
-		<th>Telefone</th>
-		<th>Data de Nascimento</th>
-		<th>Genero</th>
-		<th>Ação</th>`;
-  	// vai iterando cada paciente.
- 	pacientes.forEach(paciente => {    
+		<th>Id do Paciente</th>
+		<th>Data agendamento</th>
+		<th>Status</th>
+		<th>Categoria</th>
+		<th>Observacoes</th>`;
+  	// vai iterando cada agendamento.
+ 	agendamentos.forEach(agendamento => {    
 	  linha = `
     	<tr>
-    		<td>${paciente.nome}</td>
-    		<td>${paciente.cpf}</td>
-    		<td>${paciente.telefone} </td>
-    		<td>${paciente.dataNascimento}</td>
-			<td>${paciente.genero} </td>
-    		<td>
-    			<button onclick="editarPaciente(${paciente.id})">Editar</button>
-      			<button onclick="excluirPaciente(${paciente.id},'${paciente.nome}')">Excluir</button>
-      		</td>    
+			<td>${agendamento.idPaciente}</td>
+    		<td>${agendamento.data}</td>
+    		<td>${agendamento.status} </td>
+    		<td>${agendamento.categoria}</td>
+			<td>${agendamento.observacoes} </td>  
     	`;
 	  	linhas = linhas + linha;
   	});
   
-  	listaPacientes.innerHTML  =  '<table border=1>' + linhas + '</table><br>'  +
-  		"<input type='button' onclick='carregarPacientes()' value='Atualizar'/>";  
+  	listaAgendamentos.innerHTML  =  '<table border=1>' + linhas + '</table><br>'  +
+  		"<input type='button' onclick='carregarAgendamentos()' value='Atualizar'/>";  
 }
 
-// Função para excluir um paciente
-async function excluirPaciente(id,nome) {
- 	if (confirm("Deseja excluir o paciente " + nome + " ?")) {
-    	await fetch(`${urlAPI}/${id}`, {
-      	method: "DELETE"
-    	});
-
-	carregarPacientes(); 
-  }
-}
-carregarPacientes();
-
+carregarAgendamentos();
 
 </script>
