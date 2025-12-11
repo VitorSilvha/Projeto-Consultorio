@@ -7,24 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class FrontEndController {
 
-   @GetMapping("/agendamento")
-	public String agendamento( Model model) {		
-		return "agendamento";
+	@GetMapping("/paciente")
+	public String paciente(Model model) {
+		return "paciente";
 	}
-   
-   @GetMapping("/cadastro")
-	public String cadastro( Model model) {		
-		return "cadastro";
+
+	@GetMapping("/agendamentos")
+	public String agendamentos(Model model) {
+		return "agendamentos";
 	}
-   
-   @GetMapping("/home")
-	public String index( Model model) {		
-		return "index";
-	}
-   
-   @GetMapping("/pacientes")
-	public String paciente( Model model) {		
-		return "pacientes";
-	}
-   
+
 }
