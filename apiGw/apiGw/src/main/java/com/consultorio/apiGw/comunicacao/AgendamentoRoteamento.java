@@ -10,22 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.consultorio.apiGw.entidades.Agendamento;
 
-
-
-
-@FeignClient(
-        value = "AgendamentoRoteamento",
-        url = "http://localhost:9002/"
-)
+@FeignClient(value = "AgendamentoRoteamento", url = "http://localhost:9002/")
 public interface AgendamentoRoteamento {
-	
-	
-	@RequestMapping(value = "/v1/agendamento", method = RequestMethod.POST)
-	public ResponseEntity<String>salvar(@RequestBody Agendamento agendamento);
-		
-	@RequestMapping(value = "/v1/agendamento", method = RequestMethod.GET)
-	public ResponseEntity<List<Agendamento>> listar() ;
 
-	
-		
+	@RequestMapping(value = "/v1/agendamento", method = RequestMethod.POST)
+	public ResponseEntity<String> salvar(@RequestBody Agendamento agendamento);
+
+	@RequestMapping(value = "/v1/agendamento", method = RequestMethod.GET)
+	public ResponseEntity<List<Agendamento>> listar();
+
 }

@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.consultorio.apiGw.configuration.RetreiveMessageErrorDecoder;
 import com.consultorio.apiGw.entidades.Paciente;
 
 @FeignClient(
-        name = "PacienteRoteamento",
-        url = "http://localhost:9000/",
-        configuration = {RetreiveMessageErrorDecoder.class}
+        value = "PacienteRoteamento",
+        url = "http://localhost:9003/"
 )
 public interface PacienteRoteamento {
 
