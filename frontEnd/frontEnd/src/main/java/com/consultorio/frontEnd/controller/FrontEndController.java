@@ -22,9 +22,9 @@ public class FrontEndController {
 		return "index";
 	}
    
-   @GetMapping("/paciente")
+   @GetMapping("/pacientes")
 	public String paciente( Model model) {		
-		return "paciente";
+		return "pacientes";
 	}
    
 }
