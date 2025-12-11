@@ -13,7 +13,7 @@ import com.consultorio.apiGw.configuration.RetreiveMessageErrorDecoder;
 import com.consultorio.apiGw.entidades.Paciente;
 
 @FeignClient(
-        name = "ClienteRoteamento",
+        name = "PacienteRoteamento",
         url = "http://localhost:9000/",
         configuration = {RetreiveMessageErrorDecoder.class}
 )
@@ -31,10 +31,10 @@ public interface PacienteRoteamento {
     @RequestMapping(value = "/v1/paciente", method = RequestMethod.PUT)
     ResponseEntity<String> atualizar(@RequestBody Paciente paciente);
     
-	@RequestMapping(value = "/v1/cliente/existe-paciente/{id}",method = RequestMethod.GET)
+	@RequestMapping(value = "/v1/paciente/existe-paciente/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Boolean> existePaciente(@PathVariable Integer id);
 	
-	@RequestMapping(value = "/v1/cliente/buscar-paciente/{id}",method = RequestMethod.GET)
+	@RequestMapping(value = "/v1/paciente/buscar-paciente/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Paciente> buscarPaciente(@PathVariable Integer id);
 
 }
