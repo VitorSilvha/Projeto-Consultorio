@@ -32,9 +32,9 @@ public interface PacienteRoteamento {
     ResponseEntity<String> atualizar(@RequestBody Paciente paciente);
     
 	@RequestMapping(value = "/v1/paciente/existe-paciente/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Boolean> existePaciente(@PathVariable Integer id);
+	ResponseEntity<Boolean> existePaciente(@PathVariable Integer id);
 	
 	@RequestMapping(value = "/v1/paciente/buscar-paciente/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Paciente> buscarPaciente(@PathVariable Integer id);
+	ResponseEntity<Paciente> buscarPaciente(@PathVariable Integer id);
 
 }

@@ -4,28 +4,24 @@ import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.consultorio.agendamentoServer.entidades.Agendamento;
-import com.consultorio.apiGw.configuration.RetreiveMessageErrorDecoder;
+import com.consultorio.apiGw.entidades.Agendamento;
 
 
 
 
 @FeignClient(
-        name = "AgendamentoRoteamento",
-        url = "http://localhost:9002/",
-        configuration = {RetreiveMessageErrorDecoder.class}
+        value = "AgendamentoRoteamento",
+        url = "http://localhost:9002/"
 )
-
 public interface AgendamentoRoteamento {
 	
 	
 	@RequestMapping(value = "/v1/agendamento", method = RequestMethod.POST)
-	public ResponseEntity<String> salvar(@RequestBody Agendamento agendamento);
+	public ResponseEntity<String>salvar(@RequestBody Agendamento agendamento);
 		
 	@RequestMapping(value = "/v1/agendamento", method = RequestMethod.GET)
 	public ResponseEntity<List<Agendamento>> listar() ;
